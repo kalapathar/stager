@@ -1,3 +1,4 @@
 stagerHugo/*
 startup_stagerHugo.sh
 *.pyc
+*.sqlite3
