@@ -1,7 +1,5 @@
 from django.shortcuts import render
 
-from django.http import HttpResponse
-
-
 def index(request):
-    return HttpResponse("Hello, world. You're at the stager index.")
+	context = {}
+	return render(request, "appstager/base.html",context)
