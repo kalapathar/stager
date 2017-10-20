@@ -1,27 +1,74 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>title</title>
-  <meta name="author" content="Deepak Shah, Luke Zimmerman, Hugo Valent">
-  <meta name="description" content="Theater production planning application">
-  <meta name="keywords" content="theater, production, technology, planning, hipercic">
-  <link rel="stylesheet" href="/static/stylesheet.css" type="text/css">
-  </head>
-  <body>
-  <div class="selectedcues">
-	<ul>
-		<li><a href="#">Vibrate</a></li>
-		<li><a href="#">Flash</a></li>
-	</ul>
-  </div>
-  <div class="listcues">
-		<li><a href="#">Vibrate</a></li>
-		<li><a href="#">Flash</a></li>
-		<li><a href="#">Music</a></li>
-  </div>
-  <div class="visualizecues">
-  </div>
-  </body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Stager | St. Olaf College</title>
+        <meta name="author" content="Deepak Shah, Luke Zimmerman, Hugo Valent">
+        <meta name="description" content="Theater production planning application">
+        <meta name="keywords" content="theater, production, technology, planning, hipercic">
+
+        <link rel="stylesheet" href="/static/base.css" type="text/css">
+
+        <script>
+            // assign a unique ID to each event in the sequence
+            var evCount = 3;
+
+            // dropping is only allowed <ul> or <li> elements
+            function allowDrop(ev) {
+                ev.preventDefault();
+                if (ev.target.tagName == "LI" || ev.target.tagName == "UL")
+                    ev.dataTransfer.dropEffect = "none";
+                else
+                    ev.dataTransfer.dropEffect = "all";
+            }
+
+            // drag the element
+            function drag(ev) {
+                ev.dataTransfer.setData("text", ev.target.id);
+            }
+
+            // drop the element and clone the node
+            function drop(ev) {
+                ev.preventDefault();
+                var data = ev.dataTransfer.getData("text");
+                var copy = document.getElementById(data).cloneNode(true);
+                copy.id = "event" + evCount;
+                copy.draggable = "false";
+                ev.target.appendChild(copy);
+                evCount++;
+            }
+        </script>
+    </head>
+    <body>
+    <div class="seq" ondragover="allowDrop(event)" ondrop="drop(event)">
+        <ul>
+            <li>
+                <a href="#">Vibrate</a>
+            </li>
+            <li>
+                <a href="#">Flash</a>
+            </li>
+        </ul>
+    </div>
+    <div class="ops">
+        <ul>
+            <li id="vibrate" draggable="true" ondragstart="drag(event)">
+                <a href="#">Vibrate</a>
+            </li>
+            <li id="flash" draggable="true" ondragstart="drag(event)">
+                <a href="#">Flash</a>
+            </li>
+            <li id="audio" draggable="true" ondragstart="drag(event)">
+                <a href="#">Audio</a>
+            </li>
+            <li id="tet" draggable="true" ondragstart="drag(event)">
+                <a href="#">Text</a>
+            </li>
+        </ul>
+    </div>
+    <canvas class="viz">
+    
+    </canvas>
+    </body>
 </html>
