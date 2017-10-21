@@ -1,5 +1,8 @@
 from django.shortcuts import render
+from appstager.models import Event
 
 def index(request):
-	context = {}
+	#context = {}
+	allevents=Event.objects.all()
+	context={'allevents':allevents}
 	return render(request, "appstager/base.html",context)
