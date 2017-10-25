@@ -7,6 +7,7 @@ from django.db import models
 
 class Event(models.Model):
 	event_name=models.CharField(max_length=30)
+	sequences =  models.ManyToManyField(Sequence)
 	# def __init__(self):
 	# 	self.event_name=event_name
 
@@ -15,13 +16,15 @@ class Event(models.Model):
 
 
 class Sequence:
+    sequence_name = models.CharField(max_length=30)
+
     def __init__(self,Event):
-        self.sequence_list=list();
+        self.sequence_list=list()
         self.sequence_list.append(Event)
     def add_sequence(self,Event):
         self.sequence_list.append(Event)
-	def delete_sequence(self):
-        self.sequence_list=list()
+    def delete_sequence(self):
+            self.sequence_list=list()
     def delete_event(self,Event):
         self.sequence_list.remove(Event)
     def delete_latest_event(self):
