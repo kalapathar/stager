@@ -41,6 +41,7 @@
         </script>
     </head>
     <body>
+
     <div class="seq" ondragover="allowDrop(event)" ondrop="drop(event)">
         <ul>
             <li>
@@ -53,10 +54,13 @@
     </div>
     <div class="ops">
         <ul>
-            <li id="vibrate" draggable="true" ondragstart="drag(event)">
-                <a href="#">Vibrate</a>
-            </li>
-            <li id="flash" draggable="true" ondragstart="drag(event)">
+            {% for events in allevents%}
+              <li id="anevent" draggable="true" ondragstart="drag(event)">
+                <a href="#">{{events.event_name}}</a>
+              </li>
+            {% endfor %}
+            
+            <!--<li id="flash" draggable="true" ondragstart="drag(event)">
                 <a href="#">Flash</a>
             </li>
             <li id="audio" draggable="true" ondragstart="drag(event)">
@@ -64,11 +68,14 @@
             </li>
             <li id="tet" draggable="true" ondragstart="drag(event)">
                 <a href="#">Text</a>
-            </li>
+            </li> !-->
         </ul>
     </div>
     <canvas class="viz">
     
     </canvas>
+
+    
+    
     </body>
 </html>
