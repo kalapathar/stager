@@ -1,8 +1,27 @@
 from django.db import models
-
+import uuid
 # Create your models here.
 
 
+
+
+
+class Event(models.Model):
+    event_name=models.CharField(max_length=30,help_text="Name of the event Ex- 'Play', 'Vibrate'")
+    def __str__(self):
+        return (self.event_name)
+
+
+class Sequence(models.Model):
+    id=models.UUIDField(primary_key=True,default=uuid.uuid4,help_text="Unique id for the sequence")
+    events_sequence=models.ManyToManyField(Event,help_text="Add Event")
+
+    def __str__(self):
+        return (self.id)
+
+
+
+'''
 		
 class Sequence(models.Model):
     sequence_name = models.CharField(max_length=30)
@@ -31,3 +50,4 @@ class Event(models.Model):
 
 	def __str__(self):
 		return (self.event_name)
+'''
