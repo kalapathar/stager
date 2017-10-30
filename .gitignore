@@ -2,3 +2,4 @@ stagerHugo/*
 startup_stagerHugo.sh
 *.pyc
 *.sqlite3
+*.DS_Store
