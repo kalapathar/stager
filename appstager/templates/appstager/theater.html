@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<style>
+		.seat {
+			fill: gray;
+			stroke: black;
+			stroke-width: 1;
+		}
+		.select {
+			fill: red;
+			stroke: black;
+			stroke-width: 1;
+		}
+	</style>
+</head>
+
+<body>
+
+<svg width="230" height="170">
+	<rect width="230" height="60" x="0" y="90" fill="lightgray" />
+	<text x="95" y="125" fill="black">Stage</text>
+
+
+	<rect width="100" height="80" fill="lightgray" />
+	<circle id="D1" cx="10" cy="10" r="5" class="seat" />
+	<circle id="D2" cx="30" cy="10" r="5" class="seat" />
+	<circle id="D3" cx="50" cy="10" r="5" class="seat" />
+	<circle id="D4" cx="70" cy="10" r="5" class="seat" />
+	<circle id="D5" cx="90" cy="10" r="5" class="seat" />
+
+	<circle id="C1" cx="10" cy="30" r="5" class="seat" />
+	<circle id="C2" cx="30" cy="30" r="5" class="seat" />
+	<circle id="C3" cx="50" cy="30" r="5" class="seat" />
+	<circle id="C4" cx="70" cy="30" r="5" class="seat" />
+	<circle id="C5" cx="90" cy="30" r="5" class="seat" />
+
+	<circle id="B1" cx="10" cy="50" r="5" class="seat" />
+	<circle id="B2" cx="30" cy="50" r="5" class="seat" />
+	<circle id="B3" cx="50" cy="50" r="5" class="seat" />
+	<circle id="B4" cx="70" cy="50" r="5" class="seat" />
+	<circle id="B5" cx="90" cy="50" r="5" class="seat" />
+
+	<circle id="A1" cx="10" cy="70" r="5" class="seat" />
+	<circle id="A2" cx="30" cy="70" r="5" class="seat" />
+	<circle id="A3" cx="50" cy="70" r="5" class="seat" />
+	<circle id="A4" cx="70" cy="70" r="5" class="seat" />
+	<circle id="A5" cx="90" cy="70" r="5" class="seat" />
+
+
+	<rect width="100" height="80" x="130" y="0" fill="lightgrey" />
+	<circle id="D6" cx="140" cy="10" r="5" class="seat" />
+	<circle id="D7" cx="160" cy="10" r="5" class="seat" />
+	<circle id="D8" cx="180" cy="10" r="5" class="seat" />
+	<circle id="D9" cx="200" cy="10" r="5" class="seat" />
+	<circle id="D10" cx="220" cy="10" r="5" class="seat" />
+
+	<circle id="C6" cx="140" cy="30" r="5" class="seat" />
+	<circle id="C7" cx="160" cy="30" r="5" class="seat" />
+	<circle id="C8" cx="180" cy="30" r="5" class="seat" />
+	<circle id="C9" cx="200" cy="30" r="5" class="seat" />
+	<circle id="C10" cx="220" cy="30" r="5" class="seat" />
+
+	<circle id="B6" cx="140" cy="50" r="5" class="seat" />
+	<circle id="B7" cx="160" cy="50" r="5" class="seat" />
+	<circle id="B8" cx="180" cy="50" r="5" class="seat" />
+	<circle id="B9" cx="200" cy="50" r="5" class="seat" />
+	<circle id="B10" cx="220" cy="50" r="5" class="seat" />
+
+	<circle id="A6" cx="140" cy="70" r="5" class="seat" />
+	<circle id="A7" cx="160" cy="70" r="5" class="seat" />
+	<circle id="A8" cx="180" cy="70" r="5" class="seat" />
+	<circle id="A9" cx="200" cy="70" r="5" class="seat" />
+	<circle id="A10" cx="220" cy="70" r="5" class="seat" />
+</svg>
+
+<div id="selection">
+	<h3>Selection information</h3>
+</div>
+
+<script>
+$(document).ready(function() {
+	$("circle").click(function() {
+		if(this.getAttribute("class") == "seat") {
+			$(this).attr("class", "select");
+		} else {
+			$(this).attr("class", "seat");
+		}
+
+		$("#selection").append("<p>" + this.id + "</p>");
+	});
+});
+</script>
+
+</body>
+</html>
