@@ -4,6 +4,6 @@ from appstager.models import Event
 def index(request):
 	#context = {}
 	allevents=Event.objects.all()
-	print request
+	print (request)
 	context={'allevents':allevents}
 	return render(request, "appstager/base.html",context)
