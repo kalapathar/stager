@@ -12,7 +12,7 @@
 
         <link rel="stylesheet" type="text/css" href="{% static 'appstager/base.css' %}" />
         <link rel="stylesheet" type="text/css" href="{% static 'appstager/theater.css' %}" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="{% static 'appstager/jquery-3.2.1.js' %}"></script>
 
         <script>
             // assign a unique ID to each event in the sequence
@@ -44,15 +44,20 @@
             }
         
             $(document).ready(function() {
-              $("circle").click(function() {
-                if(this.getAttribute("class") == "seat") {
-                    $(this).attr("class", "select");
-                } else {
-                    $(this).attr("class", "seat");
-                }
+                $("circle").click(function() {
+                    if(this.getAttribute("class") == "seat") {
+                        $(this).attr("class", "select");
+                    } else {
+                        $(this).attr("class", "seat");
+                    }
+                    $("#selection").append("<p>" + this.id + "</p>");
+                });
+            });
 
-            $("#selection").append("<p>" + this.id + "</p>");
-              });
+            $(document).ready(function() {
+                $('.seq .itemButton').click(function(e) {
+                    $(this).find('.panel').toggle();
+                });
             });
         </script>
     </head>
@@ -61,11 +66,17 @@
     <div class="leftBar">
         <div class="seq" ondragover="allowDrop(event)" ondrop="drop(event)">
             <ul>
-                <li>
+                <li class="itemButton">
                     <a href="#">Vibrate</a>
+                    <div class="panel">
+                        <p>Lorem ipsum...</p>
+                    </div>
                 </li>
-                <li>
+                <li class="itemButton">
                     <a href="#">Flash</a>
+                    <div class="panel">
+                        <p>Lorem ipsum...</p>
+                    </div>
                 </li>
             </ul>
         </div>
