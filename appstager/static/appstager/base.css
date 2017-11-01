@@ -33,12 +33,14 @@ a {
 }
 
 .seq {
+    display: table;
     background-color: #999999;
     width: 100%;
     height: 50%;
 }
 
 .ops {
+    display: table;
     background-color: #AAAAAA;
     width: 100%;
     height: 50%;
