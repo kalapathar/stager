@@ -1,0 +1,10 @@
+.seat {
+	fill: gray;
+	stroke: black;
+	stroke-width: 1;
+}
+.select {
+	fill: red;
+	stroke: black;
+	stroke-width: 1;
+}

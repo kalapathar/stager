@@ -15,4 +15,8 @@ from whitenoise.django import DjangoWhiteNoise
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "stager.settings")
 
 application = get_wsgi_application()
+<<<<<<< HEAD
 application = DjangoWhiteNoise(application)
+=======
+application = DjangoWhiteNoise(application)
+>>>>>>> 76496ebe1affab8e182d30402b6d889271da3fbc

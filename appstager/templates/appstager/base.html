@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,7 +10,9 @@
         <meta name="description" content="Theater production planning application">
         <meta name="keywords" content="theater, production, technology, planning, hipercic">
 
-        <link rel="stylesheet" href="/static/base.css" type="text/css">
+        <link rel="stylesheet" type="text/css" href="{% static 'appstager/base.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'appstager/theater.css' %}" />
+        <script src="{% static 'appstager/jquery-3.2.1.js' %}"></script>
 
         <script>
             // assign a unique ID to each event in the sequence
@@ -38,44 +42,57 @@
                 ev.target.appendChild(copy);
                 evCount++;
             }
+        
+            $(document).ready(function() {
+                $("circle").click(function() {
+                    if(this.getAttribute("class") == "seat") {
+                        $(this).attr("class", "select");
+                    } else {
+                        $(this).attr("class", "seat");
+                    }
+                    $("#selection").append("<p>" + this.id + "</p>");
+                });
+            });
+
+            $(document).ready(function() {
+                $('.seq .itemButton').click(function(e) {
+                    $(this).find('.panel').toggle();
+                });
+            });
         </script>
     </head>
+    
     <body>
-
-    <div class="seq" ondragover="allowDrop(event)" ondrop="drop(event)">
-        <ul>
-            <li>
-                <a href="#">Vibrate</a>
-            </li>
-            <li>
-                <a href="#">Flash</a>
-            </li>
-        </ul>
+    <div class="leftBar">
+        <div class="seq" ondragover="allowDrop(event)" ondrop="drop(event)">
+            <ul>
+                <li class="itemButton">
+                    <a href="#">Vibrate</a>
+                    <div class="panel">
+                        <p>Lorem ipsum...</p>
+                    </div>
+                </li>
+                <li class="itemButton">
+                    <a href="#">Flash</a>
+                    <div class="panel">
+                        <p>Lorem ipsum...</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="ops">
+            <ul>
+                {% for events in allevents%}
+                <li id="anevent" draggable="true" ondragstart="drag(event)">
+                    <a href="#">{{events.event_name}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
-    <div class="ops">
-        <ul>
-            {% for events in allevents%}
-              <li id="anevent" draggable="true" ondragstart="drag(event)">
-                <a href="#">{{events.event_name}}</a>
-              </li>
-            {% endfor %}
-            
-            <!--<li id="flash" draggable="true" ondragstart="drag(event)">
-                <a href="#">Flash</a>
-            </li>
-            <li id="audio" draggable="true" ondragstart="drag(event)">
-                <a href="#">Audio</a>
-            </li>
-            <li id="tet" draggable="true" ondragstart="drag(event)">
-                <a href="#">Text</a>
-            </li> !-->
-        </ul>
+    <div class="viz">
+        {% include "appstager/theater.html" %}
     </div>
-    <canvas class="viz">
-    
-    </canvas>
-
-    
-    
     </body>
+    
 </html>
