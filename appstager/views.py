@@ -1,3 +1,4 @@
+import requests
 from django.shortcuts import render
 from appstager.models import Event
 
