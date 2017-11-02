@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 dj-database-url==0.4.1
 Django==1.11.5
 factory-boy==2.9.2
@@ -9,10 +8,4 @@ gunicorn==19.6.0
 psycopg2==2.6.2
 whitenoise==3.2
 requests==0.11.1
-=======
-dj-database-url==0.4.2
-Django==1.11.5
-gunicorn==19.7.1
-pytz==2017.3
-whitenoise==3.3.1
->>>>>>> 76496ebe1affab8e182d30402b6d889271da3fbc
+
