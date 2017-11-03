@@ -11,7 +11,7 @@ ul {
 li {
     font-size: 1em;
     margin: 5px 10px 5px 10px;
-    padding: 5px 0px 5px 0px;
+    padding: 10px 2px 10px 2px;
     background-color: #CCCCCC;
     list-style: none;
 }
@@ -25,8 +25,13 @@ a {
     color: black;
 }
 
+.bars {
+    float: right;
+    padding: 0px 15px 0px 0px;
+}
+
 .panel {
-    padding: 0 10px;
+    padding: 10px 20px;
     background-color: white;
     display: none;
 }
@@ -55,8 +60,11 @@ a {
 }
 
 .viz {
-    background-color: #BBBBBB;
     display: block;
+    overflow-y: scroll;
+    background-color: #BBBBBB;
+    box-sizing: border-box;
+    padding: 20px;
     float: left;
     width: 50%;
     height: 100%;

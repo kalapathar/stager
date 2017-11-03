@@ -12,6 +12,7 @@
 
         <link rel="stylesheet" type="text/css" href="{% static 'appstager/base.css' %}" />
         <link rel="stylesheet" type="text/css" href="{% static 'appstager/theater.css' %}" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="{% static 'appstager/jquery-3.2.1.js' %}"></script>
 
         <script>
@@ -55,8 +56,8 @@
             });
 
             $(document).ready(function() {
-                $('.seq .itemButton').click(function(e) {
-                    $(this).find('.panel').toggle();
+                $('.seq .itemButton .fa').click(function(e) {
+                    $(this).parent().find('.panel').slideToggle('500');
                 });
             });
         </script>
@@ -68,14 +69,26 @@
             <ul>
                 <li class="itemButton">
                     <a href="#">Vibrate</a>
+                    <i class="fa fa-bars bars" aria-hidden="true"></i>
                     <div class="panel">
-                        <p>Lorem ipsum...</p>
+                        <div>
+                            <label>Name</label><br />
+                            <input type="text" /><br />
+                            <label>Description</label><br />
+                            <input type="text" /><br />
+                        </div>
                     </div>
                 </li>
-                <li class="itemButton">
+                <li class="itemButton" >
                     <a href="#">Flash</a>
+                    <i class="fa fa-bars bars" aria-hidden="true"></i>
                     <div class="panel">
-                        <p>Lorem ipsum...</p>
+                        <div>
+                            <label>Name</label><br />
+                            <input type="text" /><br />
+                            <label>Description</label><br />
+                            <input type="text" /><br />
+                        </div>
                     </div>
                 </li>
             </ul>
