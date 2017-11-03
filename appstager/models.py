@@ -8,7 +8,7 @@ class Action(models.Model):
     description = models.CharField(max_length = 200, help_text = "Description of the action")
     
     def __str__(self):
-        return (self.id)
+        return (str(self.id))
 
 class ActionType(models.Model):
     name = models.CharField(max_length = 50, help_text = "Name of the event (i.e. 'Play', 'Vibrate')")
