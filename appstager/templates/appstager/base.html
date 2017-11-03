@@ -56,7 +56,7 @@
             });
 
             $(document).ready(function() {
-                $('.seq .itemButton .fa').click(function(e) {
+                $('.action .itemButton .fa').click(function(e) {
                     $(this).parent().find('.panel').slideToggle('500');
                 });
             });
@@ -65,7 +65,8 @@
     
     <body>
     <div class="leftBar">
-        <div class="seq" ondragover="allowDrop(event)" ondrop="drop(event)">
+        <div class="action" ondragover="allowDrop(event)" ondrop="drop(event)">
+            <h3>Actions</h3>
             <ul>
                 <li class="itemButton">
                     <a href="#">Vibrate</a>
@@ -94,16 +95,18 @@
             </ul>
         </div>
         <div class="ops">
+            <h3>Action Types</h3>
             <ul>
-                {% for events in allevents%}
+                {% for type in actionType%}
                 <li id="anevent" draggable="true" ondragstart="drag(event)">
-                    <a href="#">{{events.event_name}}</a>
+                    <a href="#">{{type.name}}</a>
                 </li>
                 {% endfor %}
             </ul>
         </div>
     </div>
     <div class="viz">
+        <h3>Visualization</h3>
         {% include "appstager/theater.html" %}
     </div>
     </body>
