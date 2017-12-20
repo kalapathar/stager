@@ -1,0 +1,29 @@
+				{% for act in actionData %}
+            	<li class="itemButton" id="event{{ forloop.counter }}" title="{{act.name}}">
+            		<label id="orderLabel">{{act.order}}</label> &nbsp;
+            		<label id="actionLabel">{{act.action_type}}</label> &nbsp;
+            		<label id="nameLabel">{{act.name}}</label> &nbsp;
+            		<label id="durationLabel">{{act.duration}}</label> &nbsp;
+            		<i class="fa fa-bars bars" aria-hidden="true"></i>
+            		<i class="fa fa-arrow-down arrow" aria-hidden="true"></i>
+            		<i class="fa fa-arrow-up arrow" aria-hidden="true"></i>
+            		<div class="panel">
+            			<label><b>Name: </b></label>
+            			{{act.name}}<br />
+                       	<label><b>Description: </b></label>
+                       	{{act.description}} <br />
+                  	</div>
+            	</li>
+            	{% endfor %}
+            	<li class="addNewAction">
+					<div id="addLabel">
+						Add...
+					</div>
+            		<div id="newAction" class="sidenav2">
+						<i class="fa fa-bell addActionTypeA" aria-hidden="true" title="Vibrate"></i>
+						<i class="fa fa-square addActionTypeA" aria-hidden="true" title="Background"></i>
+						<i class="fa fa-volume-up addActionTypeA" aria-hidden="true" title="Sound"></i>
+						<i class="fa fa-picture-o addActionTypeA" aria-hidden="true" title="Image"></i>
+						<i class="fa fa-film addActionTypeA" aria-hidden="true" title="Video"></i>
+  					</div>
+            	</li>

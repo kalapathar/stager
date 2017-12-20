@@ -1,0 +1,9 @@
+		<form id="newActionForm" action="/submitAction" method="post">
+			{% csrf_token %}
+			{% for field in form %}
+			{{ field.label_tag }} <br />
+			<div class="helpText"> {{ field.help_text }} </div>
+			{{ field }}<br />
+			{% endfor %}
+			<input type="submit" name="actionVal" value="Save" />
+		</form>

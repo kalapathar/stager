@@ -1,0 +1,28 @@
+{% extends "appstager/base.html" %}
+
+{% block main-content %}
+
+{% load staticfiles %}
+
+<h3>Existing Shows</h3>
+<ul class="show_list">
+	{% for show in shows %}
+	<li class="itemButton">
+		<label id="nameLabel">{{show.name}}</label> &nbsp;
+		<label id="directorLabel">{{show.director}}</label> &nbsp;
+	</li>
+	{% endfor %}
+</ul>
+
+<h3>Create Show</h3>
+<form action='' method='post'>
+	{% csrf_token %}
+	{% for field in form %}
+	{{ field.label_tag }} <br />
+	<div class="helpText"> {{ field.help_text }} </div>
+	{{ field }}<br />
+	{% endfor %}
+<input type='submit' name='Add' value='Add a show'>
+</form>
+{{server_response}}
+{% endblock %}

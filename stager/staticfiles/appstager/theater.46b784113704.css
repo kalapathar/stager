@@ -1,15 +1,10 @@
 .seat {
 	fill: gray;
-}
-
-.seat:hover {
-	fill: #4484CE;
 	stroke: black;
 	stroke-width: 1;
 }
-
 .select {
-	fill: #4484CE;
+	fill: red;
 	stroke: black;
 	stroke-width: 1;
 }

@@ -1,7 +1,7 @@
 #from django.test import TestCase
 import unittest,random
 from faker import Faker 
-from appstager.models import Event 
+from appstager.models import Action
 
 # A list that contains random events of sounds since Faker does not have anything as such
 event_list=['vibrate','ring','activate torch_light','play thunder_sound'] 

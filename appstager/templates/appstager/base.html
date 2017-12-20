@@ -12,105 +12,22 @@
 
         <link rel="stylesheet" type="text/css" href="{% static 'appstager/base.css' %}" />
         <link rel="stylesheet" type="text/css" href="{% static 'appstager/theater.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'appstager/nav.css' %}" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="{% static 'appstager/jquery-3.2.1.js' %}"></script>
+        <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
 
-        <script>
-            // assign a unique ID to each event in the sequence
-            var evCount = 3;
-
-            // dropping is only allowed <ul> or <li> elements
-            function allowDrop(ev) {
-                ev.preventDefault();
-                if (ev.target.tagName == "LI" || ev.target.tagName == "UL")
-                    ev.dataTransfer.dropEffect = "none";
-                else
-                    ev.dataTransfer.dropEffect = "all";
-            }
-
-            // drag the element
-            function drag(ev) {
-                ev.dataTransfer.setData("text", ev.target.id);
-            }
-
-            // drop the element and clone the node
-            function drop(ev) {
-                ev.preventDefault();
-                var data = ev.dataTransfer.getData("text");
-                var copy = document.getElementById(data).cloneNode(true);
-                copy.id = "event" + evCount;
-                copy.draggable = "false";
-                ev.target.appendChild(copy);
-                evCount++;
-            }
-        
-            $(document).ready(function() {
-                $("circle").click(function() {
-                    if(this.getAttribute("class") == "seat") {
-                        $(this).attr("class", "select");
-                    } else {
-                        $(this).attr("class", "seat");
-                    }
-                    $("#selection").append("<p>" + this.id + "</p>");
-                });
-            });
-
-            $(document).ready(function() {
-                $('.action .itemButton .fa').click(function(e) {
-                    $(this).parent().find('.panel').slideToggle('500');
-                });
-            });
-        </script>
     </head>
     
-    <body>
-    <div class="leftBar">
-        <div class="action" ondragover="allowDrop(event)" ondrop="drop(event)">
-            <h3>Actions</h3>
-            <ul>
-                <li class="itemButton">
-                    <a href="#">Vibrate</a>
-                    <i class="fa fa-bars bars" aria-hidden="true"></i>
-                    <div class="panel">
-                        <div>
-                            <label>Name</label><br />
-                            <input type="text" /><br />
-                            <label>Description</label><br />
-                            <input type="text" /><br />
-                            <button>Save</button>
-                        </div>
-                    </div>
-                </li>
-                <li class="itemButton" >
-                    <a href="#">Flash</a>
-                    <i class="fa fa-bars bars" aria-hidden="true"></i>
-                    <div class="panel">
-                        <div>
-                            <label>Name</label><br />
-                            <input type="text" /><br />
-                            <label>Description</label><br />
-                            <input type="text" /><br />
-                            <button>Save</button>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="ops">
-            <h3>Action Types</h3>
-            <ul>
-                {% for type in actionType%}
-                <li id="anevent" draggable="true" ondragstart="drag(event)">
-                    <a href="#">{{type.name}}</a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
-    <div class="viz">
-        <h3>Visualization</h3>
-        {% include "appstager/theater.html" %}
-    </div>
+
+    <body>	
+	{% if user.is_authenticated %}
+		{% include "appstager/nav.html" %}
+		{% block main-content %}
+		{% endblock %}
+	{% else %}
+		{% block login-block %}
+		{% endblock %}
+	{% endif %}
+
     </body>
-    
 </html>

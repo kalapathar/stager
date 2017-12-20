@@ -1,0 +1,338 @@
+{% extends "appstager/base.html" %}
+
+{% block main-content %}
+
+{% load staticfiles %}
+
+<script src="{% static 'appstager/jquery-3.2.1.js' %}"></script>
+
+        <script>
+            // toggle the menu using on() for the AJAX loaded content
+        	$(document).on('click','.action .itemButton .bars', function(e) {
+     			$(this).parent().find('.panel').slideToggle('500');  
+			});
+
+        	// toggle the action type icons
+			$(document).on('mouseenter mouseleave', '.addNewAction', function(e) {
+				$('#newAction').stop().toggle();
+				$('#addLabel').stop().toggle();
+			});
+
+        	// open the side navigation panel
+        	$(document).ready(function() {
+        		// open the side navigation panel
+                $("#openNav").click(function() {
+                    if($(".sidenav").css("width") == "0px") {
+                        $(".sidenav").css("width", "150px");
+                    } else {
+                        $(".sidenav").css("width", "0px");
+                    }
+                });
+
+                // close the side navigation panel
+                $(".closebtn").click(function() {
+                	$(".sidenav").css("width", "0px");
+                });
+
+				// close the side navigation on click outside
+				$(document).mouseup(function(e) {
+					var container = $('.sidenav');
+
+					// if the target of the click isn't the container nor a descendant of the container
+					if (!container.is(e.target) && container.has(e.target).length === 0) {
+						container.css("width", "0px");
+					}
+				});
+
+                // open the list properties
+                $("#propertyBtn").click(function() {
+                	$('.tabcontent').each(function() {
+    					$("#" + this.id).hide();
+					});
+					$('#StagerNav a').removeClass('active');
+					$(this).addClass('active')
+                	$("#properties").show();
+                });
+
+                // open the theater visual
+                $("#theaterBtn").click(function() {
+                	$('.tabcontent').each(function() {
+    					$("#" + this.id).hide();
+					});
+					$('#StagerNav a').removeClass('active');
+					$(this).addClass('active')
+                	$("#theaterContainer").show();
+                });
+            });
+        </script>
+    </head>
+    
+    <body>
+    <div class="leftBar">
+        <div class="action" ondragover="allowDrop(event)" ondrop="drop(event)">
+            <h3>Actions</h3>
+           	<i id="openNav" class="fa fa-plus"></i>
+            <div id="mySidenav" class="sidenav">
+		  		<a href="javascript:void(0)" class="closebtn">&times;</a>
+		  		<a class="addActionType">
+		  			<i class="fa fa-bell" aria-hidden="true" title="Vibrate"></i>
+		  			Vibrate
+		  		</a>
+		  		<a class="addActionType">
+		  			<i class="fa fa-square" aria-hidden="true" title="Background"></i>
+		  			Background
+		  		</a>
+		  		<a class="addActionType">
+            		<i class="fa fa-volume-up" aria-hidden="true" title="Sound"></i>
+		  			Sound
+		  		</a>
+		  		<a class="addActionType">
+            		<i class="fa fa-picture-o" aria-hidden="true" title="Image"></i>
+		  			Image
+		  		</a>
+		  		<a class="addActionType">
+		  			<i class="fa fa-film" aria-hidden="true" title="Video"></i>
+		  			Video
+		  		</a>
+			</div>
+            <ul class="action_list">
+            	{% for act in action %}
+            	<li class="itemButton" title="{{act.name}}">
+            		<label id="orderLabel">{{act.order}}</label> &nbsp;
+            		<label id="actionLabel">{{act.action_type}}</label> &nbsp;
+            		<label id="nameLabel">{{act.name}}</label> &nbsp;
+            		<label id="durationLabel">{{act.duration}}</label> &nbsp;
+            		<i class="fa fa-bars bars" aria-hidden="true"></i>
+            		<i class="fa fa-arrow-down arrow" aria-hidden="true"></i>
+            		<i class="fa fa-arrow-up arrow" aria-hidden="true"></i>
+            		<div class="panel">
+            			<label><b>Name: </b></label>
+            			{{act.name}}<br />
+                       	<label><b>Description: </b></label>
+                       	{{act.description}} <br />
+                  	</div>
+            	</li>
+            	{% endfor %}
+            	<li class="addNewAction">
+					<div id="addLabel">
+						Add...
+					</div>
+            		<div id="newAction" class="newAction">
+						<i class="fa fa-bell addActionTypeA" aria-hidden="true" title="Vibrate"></i>
+            			<i class="fa fa-square addActionTypeA" aria-hidden="true" title="Background"></i>
+            			<i class="fa fa-volume-up addActionTypeA" aria-hidden="true" title="Sound"></i>
+            			<i class="fa fa-picture-o addActionTypeA" aria-hidden="true" title="Image"></i>
+            			<i class="fa fa-film addActionTypeA" aria-hidden="true" title="Video"></i>
+  					</div>
+            	<li>
+            </ul>
+            <div id="sendCap">
+                <form action="" method="POST">{% csrf_token %}
+
+            	<input type="submit" name="Send" value="Send to Qlab"/>
+            </form>
+            </div>
+            <p> {{server_response}}</p>
+        </div>
+    </div>
+    <div class="viz">
+        <h3>Visualization</h3>
+        <div class="tabcontent" id="newActionForm">
+
+        </div>
+        <div class="tabcontent" id="properties">
+        	<div id="type">
+        		<h5>Action Type:</h5>
+        	</div>
+        	<div id="name">
+        		<h5>Name:</h5>
+        	</div>
+        	<div id="description">
+        		<h5>Description:</h5>
+        	</div>
+        	<div id="order">
+        		<h5>Order:</h5>
+        	</div>
+        	<div id="duration">
+        		<h5>Duration:</h5>
+        	</div>
+			<div id="red">
+				<h5>Red:</h5>
+        	</div>
+			<div id="green">
+				<h5>Green:</h5>
+        	</div>
+        	<div id="blue">
+        		<h5>Blue:</h5>
+        	</div>
+        </div>
+        <div class="tabcontent" id="theaterContainer">
+        	{% include "appstager/theater.html" %}
+        </div>
+    </div>
+
+    <!-- The Modal -->
+	<div id="myModal" class="modal">
+  		<!-- Modal content -->
+  		<div class="modal-content">
+    		<span class="closeModal">&times;</span>
+    		<p>Successfully created an action!</p>
+  		</div>
+	</div>
+
+
+    </body>
+	<script type="text/javascript" src="{% static 'appstager/jquery.cookie.js' %}"></script>
+
+    <script type="text/javascript">
+	$(function() {
+		// runs once the page loads
+
+		// CSRF block for AJAX calls
+	    var csrftoken = $.cookie('csrftoken');
+	    function csrfSafeMethod(method) {
+		    // these HTTP methods do not require CSRF protection
+		    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+		}
+		$.ajaxSetup({
+		    beforeSend: function(xhr, settings) {
+		        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+		            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+		        }
+		    }
+		});
+		/// End CSRF block
+
+		// Add an action form for a specific action type
+		$('.addActionType').click(function(e) {
+            // find the inner <i> element
+            actType = $(this).children().attr('title');
+            // console.log(actType);
+
+            // pass the action type as an argument to views.py
+            $('#newActionForm').load(
+            	"{% url 'appstager:createAction' actType='TEMP' %}".replace(/TEMP/, actType.toString()),
+            	function() {
+            		// show the panel after AJAX finishes loading
+		            $('.tabcontent').each(function() {
+		            	$("#" + this.id).hide();
+		            });
+		            $('#StagerNav a').removeClass('active');
+		            $("#newActionForm").show();
+            	});
+		});
+
+		// Add an action form for a specific action type
+		$(document).on('click', '.addActionTypeA', function(e) {
+            // find the title of the <i> element
+            actType = $(this).attr('title');
+            console.log(actType);
+
+            // pass the action type as an argument to views.py
+            $('#newActionForm').load(
+            	"{% url 'appstager:createAction' actType='TEMP' %}".replace(/TEMP/, actType.toString()),
+            	function() {
+            		// show the panel after AJAX finishes loading
+		            $('.tabcontent').each(function() {
+		            	$("#" + this.id).hide();
+		            });
+		            $('#StagerNav a').removeClass('active');
+		            $("#newActionForm").show();
+            	});
+		});
+
+    	// when a list item is clicked, update the "active" action and return in the context
+    	$(document).on('click', '.itemButton', function(e) {
+    		// get the name of the action
+    		name = $(this).attr('title');
+    		console.log(name);
+    		// pass the action name as an argument to views.py
+			$.post("{% url 'appstager:activeAction' name='TEMP' %}".replace(/TEMP/, name.toString()), getCallback).fail(addFail);
+			$('.itemButton').removeClass('active')
+			$(this).addClass('active')
+    	});
+
+    	function getCallback(data) {
+			console.log(data)
+			$('.actionAttrib').empty()
+			// populate in most recent order
+			var idNames = ["type", "name", "description", "order", "duration", "red", "green", "blue"];
+			var arr = data.split('~~~');
+			for(var i = 0; i <= arr.length - 1; i++) {
+				$('#' + idNames[i]).append("<p class=\"actionAttrib\">" + arr[i] + "</p>")
+			}
+		}
+
+    	function addCallback(data) {
+			console.log(data)
+			// update the action list on the page
+			getActions();
+		}
+		function addFail(failMessage) {
+			console.log(failMessage.responseText)
+		}
+
+		// get the actions for the page
+		function getActions(item_num) {
+    	    console.log("update actions")
+    	    $('.action_list').load(
+            "{% url 'appstager:getAction' %}"
+    	)};
+
+   		// switch the order using on() for the AJAX loaded content
+    	$(document).on('click','.action .itemButton .fa-arrow-up', function(e) {
+ 			// get the order of the button
+ 			orderStr = $(this).parent().attr('id')
+ 			order = Number(orderStr.substr(orderStr.length - 1))
+
+ 			// produce an alert and return if top item
+ 			if(order == 1) {
+ 				alert("Top element: cannot move up");
+ 				return;
+ 			}
+
+ 			// pass the action type as an argument to views.py
+			$.post("{% url 'appstager:updateActionUp' order='TEMP' %}".replace(/TEMP/, order.toString()), addCallback).fail(addFail); 
+		});
+
+		// submit the new action form using AJAX
+		$(document).on('submit', '#newActionForm', function(e) {
+			e.preventDefault();
+			$.ajax({
+				type:'POST',
+				url:"{% url 'appstager:submitAction' %}",
+				data: $(this).serialize(),
+				success: function() {
+					getActions();
+					$("#newActionForm").hide();
+
+					// display the modal
+					$('#myModal').css('display', 'block');
+
+					return;
+				},
+				error: function() {
+					return;
+				}
+			});
+		});
+
+		// when the user clicks on <span>, close the modal
+		$(".closeModal").click(function() {
+			$('#myModal').css('display', 'none');
+        });
+
+		// switch the order using on() for the AJAX loaded content
+    	$(document).on('click','.action .itemButton .fa-arrow-down', function(e) {
+ 			orderStr = $(this).parent().attr('id');
+ 			order = Number(orderStr.substr(orderStr.length - 1));
+
+ 			// pass the action type as an argument to views.py
+			$.post("{% url 'appstager:updateActionDown' order='TEMP' %}".replace(/TEMP/, order.toString()), addCallback).fail(addFail);   
+		});
+
+		// Get objects when the page first loads
+		getActions()
+	});
+	</script>
+{% endblock %}

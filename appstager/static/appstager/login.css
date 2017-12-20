@@ -1,0 +1,92 @@
+{% load static %}
+
+html, body {
+	background-color: #4484CE;
+	margin: 0px;
+	overflow: hidden;
+}
+
+h3 {
+	font-family: 'Lobster', cursive;
+	font-size: 44px;
+	text-align: center;
+	margin: 0px;
+	padding: 0px 0px 5px 0px;
+	background: #FFFFFF;
+	border-bottom: 1px solid #3C3C3C
+}
+
+p {
+	font-family: Helvetica, Arial;
+	font-size: 16px;
+}
+
+.vert {
+	position: relative;
+}
+
+.loginPanel {
+	position: relative;
+	top: 35%;
+	transform: translateY(-35%);
+	background: #FFFFFF;
+	max-width: 260px;
+	margin: 0 auto 100px;
+	padding: 10px 45px 10px 45px;
+	text-align: center;
+	box-shadow: 0px 0px 20px 0px #555555, 0px 5px 5px 0px #555555;
+}
+
+#googleLogin {
+	text-align: center;
+	margin: auto;
+}
+
+#googleLogin {
+	width: 250px;
+	height: 60px;
+	background: url("google_signin_normal.png");
+	background-size: 100%;
+}
+
+#googleLogin:hover {
+	width: 250px;
+	height: 60px;
+	background: url("google_signin_focused.png");
+	background-size: 100%;
+}
+
+#user-tools {
+	position: relative;
+	top: 35%;
+	transform: translateY(-35%);
+	margin: 0 auto 100px;
+	text-align: center;
+}
+
+a {
+	max-width: 25%;
+	overflow: hidden;
+	color: black;
+}
+
+.tile {
+	display: inline-block;
+	height: 150px;
+	width: 150px;
+	max-width: 100%;
+	max-height: 100%;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    text-align: center;
+	vertical-align: middle;
+	line-height: 150px;
+	background-size: 150px 150px;
+	background-color: white;
+	text-align: center;
+	vertical-align: middle;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	margin: 5px;
+	box-shadow: 0px 0px 20px 0px #555555, 0px 5px 5px 0px #555555;
+}

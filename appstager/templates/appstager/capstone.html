@@ -1,0 +1,16 @@
+{% extends "appstager/base.html" %}
+
+{% block main-content %}
+
+{% load staticfiles %}
+<p> Hello world</p>
+<script src="{% static 'appstager/jquery-3.2.1.js' %}"></script>
+
+	<div id="myModal" class="modal">
+  		<!-- Modal content -->
+  		<div class="modal-content">
+    		<span class="closeModal">&times;</span>
+    		<p>Successfully sent!</p>
+  		</div>
+	</div>
+{% endblock %}

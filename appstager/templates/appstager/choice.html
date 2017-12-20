@@ -1,0 +1,26 @@
+{% extends "appstager/base.html" %}
+{% block main-content %}
+{% load staticfiles %}
+
+<h3>Please Select a Theater</h3>
+
+
+{% if shows %}
+<form action='/choice/' method='post'>
+	{% csrf_token %}
+	{% for show in shows %}
+		<input type="radio" name="showname" value= "{{show.id}}" > {{ show.name }}<br>
+	{% endfor %}
+<input type='submit' name='Select a Show' value='Select a Show'>
+</form>
+{% else %}
+<form action='/choice/' method='post'>
+	{% csrf_token %}
+	{% for theater in theaters %}
+		<input type="radio" name="theatername" value= "{{theater.id}}" > {{ theater.name }}<br>
+	{% endfor %}
+<input type='submit' name='Select Theater' value='Select a Theater'>
+</form>
+<h3> No Theater Selected </h3>
+{% endif %}
+{% endblock %}
