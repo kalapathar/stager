@@ -12,7 +12,7 @@ name = "pypi"
 [packages]
 
 dj-database-url = "==0.4.1"
-django = "==1.11.5"
+django = "==1.11.29"
 factory-boy = "==2.9.2"
 faker = "==0.8.4"
 python-dateutil = "==2.6.1"
